@@ -5,7 +5,7 @@ export const Context = createContext<ReduxContextProps>({
   state: {},
   runReducers: () => ({}),
   dispatch: () => {},
-  subscribe: () => {},
+  subscribe: () => ()=>{},
 });
 
 const Provider = Context.Provider;
@@ -14,7 +14,14 @@ const Redux = ({ children, store }: ReduxProps) => {
   const listeners = useRef<Array<Function>>([]);
 
   const subscribe = useCallback(
-    (func: Function) => listeners.current.push(func),
+    (func: Function) => {
+      listeners.current.push(func)
+      // unsubscribe function
+      return () => {
+        const index = listeners.current.indexOf(func)
+        listeners.current.splice(index, 1)
+      }
+    },
     []
   );
 

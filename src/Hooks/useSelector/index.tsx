@@ -13,7 +13,8 @@ const useSelector = (getState : UseSelectorProps) => {
   }, [])
 
   useEffect(() => {
-    subscribe(handleSubscription)    
+   const unsubscribe =  subscribe(handleSubscription)
+   return unsubscribe;    
   }, [handleSubscription, subscribe]);
 
   return selectedState;

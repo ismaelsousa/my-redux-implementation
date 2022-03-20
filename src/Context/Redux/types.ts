@@ -10,7 +10,7 @@ export interface ReduxContextProps {
     [x: string]: any;
   };
   dispatch: (action?: any) => void;
-  subscribe: (func: Function) => void;
+  subscribe: (func: Function) => () => void;
 }
 
 export interface ReduxProps {
