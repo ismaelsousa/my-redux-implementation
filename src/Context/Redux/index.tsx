@@ -1,9 +1,8 @@
-import React, { createContext, useCallback, useRef, useState } from "react";
+import { createContext, useCallback, useRef } from "react";
 import { ReduxContextProps, ReduxProps } from "./types";
 
 export const Context = createContext<ReduxContextProps>({
   state: {},
-  setState: () => {},
   runReducers: () => ({}),
   dispatch: () => {},
   subscribe: () => {},
@@ -26,6 +25,8 @@ const Redux = ({ children, store }: ReduxProps) => {
     return result;
   }, []);
 
+  const { current: state } = useRef(getInitialState(store.reducers));
+
   const runReducers = useCallback((reducers: any, state: any, action?: any) => {
     Object.keys(state).forEach((key) => {
       // auth(state, action)
@@ -47,19 +48,15 @@ const Redux = ({ children, store }: ReduxProps) => {
     return state;
   }, []);
 
-  const [state, setState] = useState<Object>(() => {
-    return getInitialState(store.reducers);
-  });
-
   const dispatch = useCallback(
     (action: any) => {
-      setState((oldState) => runReducers(store.reducers, oldState, action));
+      runReducers(store.reducers, state, action);
     },
-    [runReducers, store.reducers]
+    [runReducers, state, store.reducers]
   );
 
   return (
-    <Provider value={{ state, setState, runReducers, dispatch, subscribe }}>
+    <Provider value={{ state, runReducers, dispatch, subscribe }}>
       {children}
     </Provider>
   );

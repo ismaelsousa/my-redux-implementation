@@ -2,7 +2,6 @@ import React from "react";
 
 export interface ReduxContextProps {
   state: Object;
-  setState: (state: Object) => void;
   runReducers: (
     reducers: Object,
     state?: any,
