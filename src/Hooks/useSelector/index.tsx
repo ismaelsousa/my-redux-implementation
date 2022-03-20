@@ -1,17 +1,20 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Context as ContextRedux } from "../../Context/Redux";
 import { UseSelectorProps } from "./types";
 
 const useSelector = (getState : UseSelectorProps) => {
-  const { state } = useContext(ContextRedux);
+  const { state, subscribe } = useContext(ContextRedux);
   const [selectedState, setSelectedState] = useState(getState(state));
 
+  const handleSubscription = useCallback((newState)=>{
+    const selected = getState(newState)
+    setSelectedState(selected)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   useEffect(() => {
-    const newSelected = getState(state);
-    if (selectedState !== newSelected) {
-      setSelectedState(newSelected);
-    }
-  }, [getState, selectedState, state]);
+    subscribe(handleSubscription)    
+  }, [handleSubscription, subscribe]);
 
   return selectedState;
 };

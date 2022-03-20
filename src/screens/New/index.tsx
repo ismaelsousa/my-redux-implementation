@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useEffect } from 'react';
 import useDispatch from '../../Hooks/useDispatch';
 import useSelector from '../../Hooks/useSelector';
 import { changeNameAuth } from '../../store/modules/auth/actions';
@@ -10,9 +10,15 @@ const New: React.FC = () => {
 
   const handleChangeName = ()=> dispatch(changeNameAuth({name:`${new Date().toISOString()}`}))
 
+ 
   console.log("Render: New");
-  
-  return <div><h1>New: {state.name}</h1> <button onClick={handleChangeName}>Press</button></div>;
+ 
+  return ( 
+    <div>
+      <h1>New: {state.name}</h1> 
+      <button onClick={handleChangeName}>Press</button>
+    </div>
+  );
 }
 
-export default New;
+export default memo(New);
