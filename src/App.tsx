@@ -1,6 +1,6 @@
 import React from "react";
 import Redux from "./Context/Redux";
-import Routes from "./Routes";
+// import Routes from "./Routes";
 import New from "./screens/New";
 import Start from "./screens/Start";
 import { store } from "./store";
