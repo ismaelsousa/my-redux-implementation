@@ -1,16 +1,15 @@
 import React from "react";
 import Redux from "./Context/Redux";
-// import Routes from "./Routes";
-import New from "./screens/New";
-import Start from "./screens/Start";
+import Account from "./screens/Account";
+import Posts from "./screens/Posts";
 import { store } from "./store";
 
 function App() {
   return (
     <Redux store={store}>
       {/* <Routes /> */}
-      <Start/>
-      <New/>
+      <Posts/>
+      <Account/>
     </Redux>
   );
 }

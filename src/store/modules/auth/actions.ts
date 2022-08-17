@@ -1,8 +1,15 @@
-export const changeNameAuth = ({ name }: { name: string }) => {
+export const login = ({ name, email }: { name: string; email: string }) => {
   return {
-    type: "Test",
+    type: "AUTH/LOGIN_SUCCESS",
     payload: {
       name,
+      email,
     },
+  };
+};
+
+export const logout = () => {
+  return {
+    type: "AUTH/LOGOUT",
   };
 };

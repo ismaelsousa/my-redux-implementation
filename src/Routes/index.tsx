@@ -1,14 +1,14 @@
 import React from "react";
-import New from "../screens/New";
-import Start from "../screens/Start";
+import Account from "../screens/Account";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Posts from "../screens/Posts";
 
 const RoutesApp = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route  path="/" element={<Start />}></Route>
-        <Route path="/new" element={<New />}></Route>
+        <Route  path="/" element={<Posts />}></Route>
+        <Route path="/account" element={<Account />}></Route>
       </Routes>
     </BrowserRouter>
   );

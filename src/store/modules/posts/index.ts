@@ -1,13 +1,20 @@
+export interface IPost {
+  description: string;
+  url: string;
+}
+
 const initialState = {
-  list: [],
+  list: [] as Array<IPost>,
 };
+
+export type PostsState = typeof initialState;
 
 export const posts = (state = initialState, action: any) => {
   switch (action?.type) {
-    case "agente":
+    case "ADD":
       return {
         ...state,
-        list: [...state.list, { name: "gente" }],
+        list: [...state.list, action.payload],
       };
     default:
       return state;

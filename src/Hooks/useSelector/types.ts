@@ -1,1 +1,1 @@
-export type UseSelectorProps = (state: Object) => Object;
+export type UseSelectorProps = (state: any) => any;
